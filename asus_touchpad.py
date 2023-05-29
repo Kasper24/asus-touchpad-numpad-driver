@@ -158,7 +158,7 @@ def activate_numlock(brightness):
     udev.send_events(events)
     d_t.grab()
     subprocess.call(numpad_cmd, shell=True)
-
+    change_brightness(1)
 
 def deactivate_numlock():
     numpad_cmd = "i2ctransfer -f -y " + device_id + " w13@0x15 0x05 0x00 0x3d 0x03 0x06 0x00 0x07 0x00 0x0d 0x14 0x03 0x00 0xad"
@@ -169,7 +169,7 @@ def deactivate_numlock():
     udev.send_events(events)
     d_t.ungrab()
     subprocess.call(numpad_cmd, shell=True)
-
+    change_brightness(0)
 
 def launch_calculator():
     try:
@@ -281,7 +281,7 @@ while True:
                 # skip invalid row and col values
                 log.debug('Unhandled col/row %d/%d for position %d-%d', col, row, x, y)
                 continue
-            
+
             if button_pressed == EV_KEY.KEY_5:
                 button_pressed = percentage_key
 
